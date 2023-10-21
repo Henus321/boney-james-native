@@ -1,16 +1,23 @@
-import {View, Text, Button} from 'react-native';
+import {View, Text, Button, FlatList} from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useEffect, useState} from 'react';
 import {db} from '../utils/firebase';
 import {collectionGroup, getDocs, query} from 'firebase/firestore';
+import CollectionItem from '../components/Collection/CollectionItem';
+import {IItem} from '../models';
 
 interface RouterProps {
   navigation: NavigationProp<any, any>;
 }
 
+function renderCollectionItem({item}: {item: IItem}) {
+  return <CollectionItem item={item} />;
+}
+
 function CollectionScreen({navigation}: RouterProps) {
-  const [collection, setCollection] = useState<any[]>();
+  const [collection, setCollection] = useState<IItem[]>();
+
   useEffect(() => {
     const fetch = async () => {
       const collectionRef = collectionGroup(db, 'collection');
@@ -19,7 +26,7 @@ function CollectionScreen({navigation}: RouterProps) {
 
       const collection = querySnapshot.docs.map(docSnapshot =>
         docSnapshot.data(),
-      );
+      ) as IItem[];
 
       setCollection(collection);
     };
@@ -41,6 +48,11 @@ function CollectionScreen({navigation}: RouterProps) {
       <Button
         onPress={itemPressHandler}
         title="Click to Navigate Item Screen"
+      />
+      <FlatList
+        data={collection}
+        renderItem={renderCollectionItem}
+        keyExtractor={item => item.slug}
       />
     </View>
   );
