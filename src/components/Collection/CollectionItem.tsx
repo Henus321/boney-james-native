@@ -25,7 +25,7 @@ function CollectionItem({item}: CollectionItemProps) {
   }
 
   return (
-    <Pressable onPress={itemPressHandler} style={styles.collectionItem}>
+    <Pressable onPress={itemPressHandler} style={styles.container}>
       <View>
         <Image
           source={{
@@ -34,7 +34,10 @@ function CollectionItem({item}: CollectionItemProps) {
           style={styles.image}
         />
       </View>
-      <Text>{item.name}</Text>
+      <View style={styles.details}>
+        <Text>{item.name}</Text>
+        <Text>{item.cost} &#8381;</Text>
+      </View>
       <ColorPicker
         itemOptions={options}
         activeColor={activeColor}
@@ -47,14 +50,17 @@ function CollectionItem({item}: CollectionItemProps) {
 export default CollectionItem;
 
 const styles = StyleSheet.create({
-  collectionItem: {
-    display: 'flex',
-    gap: 4,
-    marginBottom: 10,
+  container: {
+    width: '49%',
+    backgroundColor: 'white',
+    marginBottom: 20,
   },
   image: {
-    width: '50%',
+    width: '100%',
     height: 320,
     objectFit: 'cover',
+  },
+  details: {
+    padding: 5,
   },
 });

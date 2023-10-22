@@ -2,13 +2,9 @@ import {useEffect, useState} from 'react';
 import {db} from '../../utils/firebase';
 import {collectionGroup, getDocs, query} from 'firebase/firestore';
 import {ItemType} from '../../models';
-import {FlatList, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 
 import CollectionItem from './CollectionItem';
-
-function renderCollectionItem({item}: {item: ItemType}) {
-  return <CollectionItem item={item} />;
-}
 
 function CollectionList() {
   const [collection, setCollection] = useState<ItemType[]>();
@@ -29,14 +25,26 @@ function CollectionList() {
   }, []);
 
   return (
-    <FlatList
-      data={collection}
-      renderItem={renderCollectionItem}
-      keyExtractor={item => item.slug}
-    />
+    <ScrollView>
+      <View style={styles.container}>
+        {collection &&
+          collection.map(item => (
+            <CollectionItem key={item.slug} item={item} />
+          ))}
+      </View>
+    </ScrollView>
   );
 }
 
 export default CollectionList;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    padding: 5,
+    backgroundColor: 'green',
+  },
+});
