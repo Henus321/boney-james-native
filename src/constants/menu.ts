@@ -1,29 +1,31 @@
+import {BottomTabsListType} from '../models';
+
 import CollectionScreen from '../screens/CollectionScreen';
 import CustomersScreen from '../screens/CustomersScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ShopsScreen from '../screens/ShopsScreen';
 
-export const BottomTabsList = [
+export const BottomTabsList: BottomTabsListType[] = [
   {
-    name: 'Коллекция',
+    name: 'CollectionScreen',
     title: 'Коллекция',
     icon: 'calendar',
     component: CollectionScreen,
   },
   {
-    name: 'Магазины',
+    name: 'ShopsScreen',
     title: 'Магазины',
     icon: 'calendar',
     component: ShopsScreen,
   },
   {
-    name: 'Покупателям',
+    name: 'CustomersScreen',
     title: 'Покупателям',
     icon: 'calendar',
     component: CustomersScreen,
   },
   {
-    name: 'Профиль',
+    name: 'ProfileScreen',
     title: 'Профиль',
     icon: 'calendar',
     component: ProfileScreen,

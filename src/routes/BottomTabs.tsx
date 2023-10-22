@@ -1,9 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {GlobalStyles, BottomTabsList} from '../constants';
 import {StyleSheet, Text} from 'react-native';
+import {BottomTabsStackParamList} from '../models';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Tabs = createBottomTabNavigator();
+const Tabs = createBottomTabNavigator<BottomTabsStackParamList>();
 
 function BottomTabs() {
   return (

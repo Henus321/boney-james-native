@@ -11,16 +11,7 @@ export const GlobalStyles = {
     blackBorder: 'rgba(0, 0, 0, 0.1)',
     blackTransparent: 'rgba(0, 0, 0, 0.6)',
     crimson: '#dc143c',
-  },
-  coatColors: {
-    beige: '#ccb178',
-    lightBeige: '#ebdbb9',
-    grey: '#a0a0a0',
-    black: '#161616',
-    darkBlue: '#080e61',
-    darkGreen: '#094149',
-    turquoiser: '#2e9ec0',
-    milk: '#e7e7e7',
+    border: '#add8e675',
   },
   fonts: {
     smallest: 10,

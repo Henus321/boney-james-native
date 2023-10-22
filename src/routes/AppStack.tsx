@@ -1,10 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../models';
 
 import ItemScreen from '../screens/ItemScreen';
 import BottomTabs from './BottomTabs';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppStack() {
   return (
