@@ -1,6 +1,6 @@
 import {ItemOptionsType} from '../../models';
 import {Pressable, StyleSheet, View} from 'react-native';
-import {GlobalStyles} from '../../constants';
+import {GlobalStyles} from '../../constants/styles';
 
 interface Props {
   itemOptions: ItemOptionsType[];
