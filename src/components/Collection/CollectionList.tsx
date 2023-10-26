@@ -3,6 +3,7 @@ import {db} from '../../utils/firebase';
 import {collectionGroup, getDocs, query} from 'firebase/firestore';
 import {ItemType} from '../../models';
 import {ScrollView, StyleSheet, View} from 'react-native';
+import {GlobalStyles} from '../../constants/styles';
 
 import CollectionItem from './CollectionItem';
 
@@ -45,6 +46,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     padding: 5,
-    backgroundColor: 'green',
+    backgroundColor: GlobalStyles.colors.white,
   },
 });

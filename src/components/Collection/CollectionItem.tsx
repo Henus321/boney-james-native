@@ -18,8 +18,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import ColorPicker from '../ColorPicker/ColorPicker';
 
-function renderItem(itemData: ListRenderItemInfo<string>) {
-  return <Text>{itemData.item}</Text>;
+function renderSize(itemData: ListRenderItemInfo<string>) {
+  return (
+    <View style={styles.size}>
+      <Text>{itemData.item}</Text>
+    </View>
+  );
 }
 
 type CollectionItemProps = {
@@ -57,18 +61,26 @@ function CollectionItem({item}: CollectionItemProps) {
             color={GlobalStyles.colors.black}
           />
         </Pressable>
+        <View style={styles.badge}>
+          <Text>HIT</Text>
+        </View>
       </View>
       <View style={styles.details}>
         <Text>{name}</Text>
         <Text>{cost} &#8381;</Text>
       </View>
-      <ColorPicker
-        itemOptions={options}
-        activeColor={activeColor}
-        setActiveColor={setActiveColor}
-      />
+      <View style={styles.actions}>
+        <ColorPicker
+          itemOptions={options}
+          activeColor={activeColor}
+          setActiveColor={setActiveColor}
+        />
+        <Pressable onPress={() => console.log('Add to favorites')}>
+          <Icon name="heart" size={30} color={GlobalStyles.colors.black} />
+        </Pressable>
+      </View>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
@@ -76,13 +88,19 @@ function CollectionItem({item}: CollectionItemProps) {
         }}>
         <Pressable onPress={() => setModalVisible(false)}>
           <View style={styles.modalContainer}>
-            <View style={styles.modal}>
+            <Pressable
+              style={styles.modal}
+              onPress={() => console.log('Add size to cart - late')}>
+              <Text style={styles.modalTitle}>Добавить в корзину</Text>
+              <View style={styles.divider}></View>
               <FlatList
+                numColumns={4}
                 data={sizes}
-                renderItem={renderItem}
+                renderItem={renderSize}
                 keyExtractor={size => size}
+                columnWrapperStyle={{justifyContent: 'center'}}
               />
-            </View>
+            </Pressable>
           </View>
         </Pressable>
       </Modal>
@@ -95,8 +113,8 @@ export default CollectionItem;
 const styles = StyleSheet.create({
   container: {
     width: '49%',
-    backgroundColor: 'white',
-    marginBottom: 20,
+    backgroundColor: GlobalStyles.colors.white,
+    marginBottom: 30,
   },
   imageContainer: {
     position: 'relative',
@@ -111,8 +129,20 @@ const styles = StyleSheet.create({
     bottom: 4,
     right: 8,
   },
+  badge: {
+    position: 'absolute',
+    bottom: 6,
+    left: 6,
+    paddingVertical: 2,
+    paddingHorizontal: 6,
+    backgroundColor: GlobalStyles.colors.milk,
+  },
   details: {
     padding: 5,
+  },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   modalContainer: {
     position: 'relative',
@@ -122,9 +152,28 @@ const styles = StyleSheet.create({
   },
   modal: {
     position: 'absolute',
+    alignItems: 'center',
     bottom: 0,
-    height: 100,
+    height: 130,
     width: '100%',
     backgroundColor: GlobalStyles.colors.white,
+  },
+  modalTitle: {
+    fontSize: 18,
+    textAlign: 'center',
+    padding: 6,
+  },
+  divider: {
+    height: 1,
+    width: '80%',
+    marginVertical: 4,
+    backgroundColor: GlobalStyles.colors.blackBorder,
+  },
+  size: {
+    backgroundColor: GlobalStyles.colors.darkMilk,
+    padding: 10,
+    borderRadius: 20,
+    marginHorizontal: 10,
+    marginVertical: 5,
   },
 });

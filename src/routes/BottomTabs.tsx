@@ -9,7 +9,8 @@ const Tabs = createBottomTabNavigator<BottomTabsStackParamList>();
 
 function BottomTabs() {
   return (
-    <Tabs.Navigator>
+    <Tabs.Navigator
+      sceneContainerStyle={{backgroundColor: GlobalStyles.colors.white}}>
       {BottomTabsList.map(({name, title, icon, component}) => (
         <Tabs.Screen
           key={name}
