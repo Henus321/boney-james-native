@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
   container: {
     width: '49%',
     backgroundColor: GlobalStyles.colors.white,
-    marginBottom: 30,
+    marginBottom: 20,
   },
   imageContainer: {
     position: 'relative',
