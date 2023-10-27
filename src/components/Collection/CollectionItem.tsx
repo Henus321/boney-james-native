@@ -57,12 +57,12 @@ function CollectionItem({item}: CollectionItemProps) {
           <Icon
             style={styles.cartIcon}
             name="cart-outline"
-            size={30}
+            size={28}
             color={GlobalStyles.colors.black}
           />
         </Pressable>
         <View style={styles.badge}>
-          <Text>HIT</Text>
+          <Text style={styles.badgeText}>NEW</Text>
         </View>
       </View>
       <View style={styles.details}>
@@ -76,7 +76,7 @@ function CollectionItem({item}: CollectionItemProps) {
           setActiveColor={setActiveColor}
         />
         <Pressable onPress={() => console.log('Add to favorites')}>
-          <Icon name="heart" size={30} color={GlobalStyles.colors.black} />
+          <Icon name="heart" size={28} color={GlobalStyles.colors.black} />
         </Pressable>
       </View>
       <Modal
@@ -133,9 +133,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 6,
     left: 6,
-    paddingVertical: 2,
-    paddingHorizontal: 6,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
     backgroundColor: GlobalStyles.colors.milk,
+  },
+  badgeText: {
+    fontSize: 10,
   },
   details: {
     padding: 5,

@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   colorPickerItem: {
-    height: 30,
-    width: 30,
+    height: 28,
+    width: 28,
     marginRight: 4,
     borderRadius: 15,
   },
