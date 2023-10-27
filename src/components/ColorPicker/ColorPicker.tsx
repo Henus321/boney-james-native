@@ -1,20 +1,22 @@
 import {ItemOptionsType} from '../../models';
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Pressable, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {GlobalStyles} from '../../constants/styles';
 
-interface Props {
+type ColorPickerProps = {
   itemOptions: ItemOptionsType[];
   activeColor: React.CSSProperties['backgroundColor'];
   setActiveColor: (arg: React.CSSProperties['backgroundColor']) => void;
-}
+  style?: StyleProp<ViewStyle>;
+};
 
-const ColorPicker: React.FC<Props> = ({
+const ColorPicker = ({
   itemOptions,
   activeColor,
   setActiveColor,
-}) => {
+  style,
+}: ColorPickerProps) => {
   return (
-    <View style={styles.colorPicker}>
+    <View style={[styles.colorPicker, style]}>
       {itemOptions.map(({colorHex, id}) => (
         <Pressable
           onPress={() => setActiveColor(colorHex)}

@@ -17,6 +17,7 @@ import {GlobalStyles} from '../../constants/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ColorPicker from '../ColorPicker/ColorPicker';
+import Divider from '../Shared/Divider';
 
 function renderSize(itemData: ListRenderItemInfo<string>) {
   return (
@@ -92,7 +93,7 @@ function CollectionItem({item}: CollectionItemProps) {
               style={styles.modal}
               onPress={() => console.log('Add size to cart - late')}>
               <Text style={styles.modalTitle}>Добавить в корзину</Text>
-              <View style={styles.divider}></View>
+              <Divider />
               <FlatList
                 numColumns={4}
                 data={sizes}
@@ -165,12 +166,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     padding: 6,
-  },
-  divider: {
-    height: 1,
-    width: '80%',
-    marginVertical: 4,
-    backgroundColor: GlobalStyles.colors.blackBorder,
   },
   size: {
     backgroundColor: GlobalStyles.colors.darkMilk,

@@ -4,7 +4,7 @@ import {collectionGroup, getDocs, query} from 'firebase/firestore';
 import {ItemType} from '../models';
 
 import CollectionList from '../components/Collection/CollectionList';
-import ErrorView from '../components/ErrorView/ErrorView';
+import ErrorView from '../components/Shared/ErrorView';
 
 function CollectionScreen() {
   const [collection, setCollection] = useState<ItemType[]>();
