@@ -1,30 +1,14 @@
-import {useEffect, useState} from 'react';
-import {db} from '../../utils/firebase';
-import {collectionGroup, getDocs, query} from 'firebase/firestore';
-import {ItemType} from '../../models';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {GlobalStyles} from '../../constants/styles';
+import {ItemType} from '../../models';
 
 import CollectionItem from './CollectionItem';
 
-function CollectionList() {
-  const [collection, setCollection] = useState<ItemType[]>();
+type CollectionListProps = {
+  collection: ItemType[];
+};
 
-  useEffect(() => {
-    const fetch = async () => {
-      const collectionRef = collectionGroup(db, 'collection');
-      const q = query(collectionRef);
-      const querySnapshot = await getDocs(q);
-
-      const collection = querySnapshot.docs.map(docSnapshot =>
-        docSnapshot.data(),
-      ) as ItemType[];
-
-      setCollection(collection);
-    };
-    fetch();
-  }, []);
-
+function CollectionList({collection}: CollectionListProps) {
   return (
     <ScrollView>
       <View style={styles.container}>
