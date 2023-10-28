@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {ItemOptionsType, ItemType} from '../../models';
 import {GlobalStyles} from '../../constants/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ColorPicker from '../ColorPicker/ColorPicker';
+import Slider from '../Shared/Slider';
 
 type ItemProps = {
   item: ItemType;
@@ -21,14 +22,7 @@ function Item({item}: ItemProps) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.slider}>
-        {currentOption?.photos?.[0] && (
-          <Image
-            style={styles.sliderItem}
-            source={{uri: currentOption.photos[0]}}
-          />
-        )}
-      </View>
+      {currentOption?.photos && <Slider data={currentOption?.photos} />}
       <View style={styles.textContainer}>
         <Text style={styles.title}>{name}</Text>
         <Text style={styles.text}>{cost} &#8381;</Text>
@@ -58,13 +52,6 @@ const styles = StyleSheet.create({
     padding: 5,
     gap: 12,
     marginBottom: 40,
-  },
-  slider: {
-    width: '100%',
-  },
-  sliderItem: {
-    width: '100%',
-    height: 400,
   },
   textContainer: {
     gap: 4,
