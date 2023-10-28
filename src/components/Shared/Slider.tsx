@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react';
+import {useRef} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Dimensions, View, Image} from 'react-native';
 import {StyleSheet} from 'react-native';

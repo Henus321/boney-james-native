@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import ColorPicker from '../ColorPicker/ColorPicker';
 import Slider from '../Shared/Slider';
+import Button from '../Shared/Button';
 
 type ItemProps = {
   item: ItemType;
@@ -37,7 +38,9 @@ function Item({item}: ItemProps) {
         <Text>SIZE PICKER HERE</Text>
       </View>
       <View style={styles.actions}>
-        <Text>CART BUTTON HERE</Text>
+        <Button onPress={() => console.log('Cart button click')}>
+          В КОРЗИНУ
+        </Button>
         <Icon name="heart" size={20} color={GlobalStyles.colors.black} />
       </View>
     </View>
