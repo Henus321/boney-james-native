@@ -11,16 +11,19 @@ import {GlobalStyles} from '../../constants/styles';
 type ButtonProps = {
   children: React.ReactNode;
   onPress: () => void;
+  active?: boolean;
   style?: StyleProp<ViewStyle>;
 };
 
-function Button({children, onPress, style}: ButtonProps) {
+function Button({children, onPress, active = false, style}: ButtonProps) {
   return (
     <Pressable
       onPress={onPress}
       style={({pressed}) => pressed && styles.pressed}>
-      <View style={[styles.button, style]}>
-        <Text style={styles.buttonText}>{children}</Text>
+      <View style={[styles.button, active && styles.active, style]}>
+        <Text style={[styles.buttonText, active && styles.buttonTextActive]}>
+          {children}
+        </Text>
       </View>
     </Pressable>
   );
@@ -41,6 +44,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: GlobalStyles.colors.black,
     textAlign: 'center',
+  },
+  buttonTextActive: {
+    color: GlobalStyles.colors.milk,
+  },
+  active: {
+    backgroundColor: GlobalStyles.colors.darkGrey,
   },
   pressed: {
     opacity: 0.75,

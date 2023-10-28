@@ -5,6 +5,7 @@ import {GlobalStyles} from '../../constants/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ColorPicker from '../ColorPicker/ColorPicker';
+import SizePicker from '../SizePicker/SizePicker';
 import Slider from '../Shared/Slider';
 import Button from '../Shared/Button';
 
@@ -16,6 +17,7 @@ function Item({item}: ItemProps) {
   const {name, cost, description, options, sizes, slug} = item;
   const [activeColor, setActiveColor] = useState(options[0].colorHex);
   const [currentOption, setCurrentOption] = useState<ItemOptionsType>();
+  const [currentSize, setCurrentSize] = useState(sizes[0]);
 
   useEffect(() => {
     setCurrentOption(options.find(item => item.colorHex === activeColor));
@@ -34,11 +36,13 @@ function Item({item}: ItemProps) {
         activeColor={activeColor}
         setActiveColor={setActiveColor}
       />
-      <View>
-        <Text>SIZE PICKER HERE</Text>
-      </View>
+      <SizePicker
+        sizes={sizes}
+        currentSize={currentSize}
+        setCurrentSize={setCurrentSize}
+      />
       <View style={styles.actions}>
-        <Button onPress={() => console.log('Cart button click')}>
+        <Button onPress={() => console.log('Add to cart: ' + slug)}>
           В КОРЗИНУ
         </Button>
         <Icon name="heart" size={20} color={GlobalStyles.colors.black} />
