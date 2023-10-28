@@ -18,12 +18,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import ColorPicker from '../ColorPicker/ColorPicker';
 import Divider from '../Shared/Divider';
+import SizeItem from '../SizePicker/SizeItem';
 
 function renderSize(itemData: ListRenderItemInfo<string>) {
   return (
-    <View style={styles.size}>
-      <Text>{itemData.item}</Text>
-    </View>
+    <SizeItem
+      onPress={item => console.log('Add item: ' + item)}
+      size={itemData.item}
+      active={true}
+    />
   );
 }
 
@@ -99,7 +102,7 @@ function CollectionItem({item}: CollectionItemProps) {
                 data={sizes}
                 renderItem={renderSize}
                 keyExtractor={size => size}
-                columnWrapperStyle={{justifyContent: 'center'}}
+                columnWrapperStyle={{justifyContent: 'center', gap: 4}}
               />
             </Pressable>
           </View>
@@ -157,21 +160,15 @@ const styles = StyleSheet.create({
   modal: {
     position: 'absolute',
     alignItems: 'center',
+    padding: 10,
+    gap: 10,
     bottom: 0,
-    height: 130,
+    height: 140,
     width: '100%',
     backgroundColor: GlobalStyles.colors.white,
   },
   modalTitle: {
     fontSize: 18,
     textAlign: 'center',
-    padding: 6,
-  },
-  size: {
-    backgroundColor: GlobalStyles.colors.darkMilk,
-    padding: 10,
-    borderRadius: 20,
-    marginHorizontal: 10,
-    marginVertical: 5,
   },
 });

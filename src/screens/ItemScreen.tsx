@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {ItemType, RootStackParamList} from '../models';
 import {collection, getDocs, query, where} from 'firebase/firestore';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView} from 'react-native';
 import {db} from '../utils/firebase';
 
 import ErrorView from '../components/Shared/ErrorView';

@@ -1,25 +1,29 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 
-import Button from '../Shared/Button';
+import SizeItem from './SizeItem';
 
 type SizePickerProps = {
   sizes: string[];
   currentSize: string;
   setCurrentSize: (size: string) => void;
+  style?: StyleProp<ViewStyle>;
 };
 
-function SizePicker({sizes, currentSize, setCurrentSize}: SizePickerProps) {
+function SizePicker({
+  sizes,
+  currentSize,
+  setCurrentSize,
+  style,
+}: SizePickerProps) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       {sizes.map(size => (
-        <Button
+        <SizeItem
           active={size === currentSize}
           key={size}
-          style={styles.button}
-          onPress={() => setCurrentSize(size)}>
-          {size}
-        </Button>
+          size={size}
+          onPress={() => setCurrentSize(size)}
+        />
       ))}
     </View>
   );
@@ -31,9 +35,5 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     gap: 4,
-  },
-  button: {
-    paddingHorizontal: 0,
-    width: 60,
   },
 });
