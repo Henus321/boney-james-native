@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ListRenderItemInfo,
 } from 'react-native';
 import {ItemType, RootStackParamList} from '../../models';
 import {getTitlePhoto} from '../../utils/helpers';
