@@ -1,9 +1,12 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
+import {FaqList} from '../constants/shared';
+
+import Faq from '../components/Customers/Faq';
 
 function CustomersScreen() {
   return (
     <View>
-      <Text>Customers Screen</Text>
+      <Faq faqList={FaqList} />
     </View>
   );
 }

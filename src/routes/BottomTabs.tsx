@@ -18,14 +18,28 @@ function BottomTabs() {
           component={component}
           options={{
             title: title,
-            tabBarLabel: ({children}) => (
-              <Text style={styles.tabsLabel}>{children}</Text>
+            tabBarLabel: ({children, focused}) => (
+              <Text
+                style={[
+                  styles.tabsLabel,
+                  {
+                    color: focused
+                      ? GlobalStyles.colors.darkGrey
+                      : GlobalStyles.colors.lightGrey,
+                  },
+                ]}>
+                {children}
+              </Text>
             ),
-            tabBarIcon: ({size}) => (
+            tabBarIcon: ({size, focused}) => (
               <Icon
                 name={icon}
                 size={size}
-                color={GlobalStyles.colors.darkGrey}
+                color={
+                  focused
+                    ? GlobalStyles.colors.darkGrey
+                    : GlobalStyles.colors.lightGrey
+                }
               />
             ),
           }}

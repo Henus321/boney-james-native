@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import Button from '../Shared/Button';
+import Button from './Button';
 
 type SizeItemProps = {
   size: string;

@@ -1,7 +1,7 @@
 import {Linking, StyleSheet, Text, View} from 'react-native';
 import {GlobalStyles} from '../../constants/styles';
 import {Pressable} from 'react-native';
-import {SocialNetworkList} from '../../constants/social';
+import {SocialNetworkList} from '../../constants/shared';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Divider from '../Shared/Divider';

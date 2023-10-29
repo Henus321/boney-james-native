@@ -15,9 +15,9 @@ import {useNavigation} from '@react-navigation/core';
 import {GlobalStyles} from '../../constants/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import ColorPicker from '../ColorPicker/ColorPicker';
+import ColorPicker from '../Shared/ColorPicker';
 import Divider from '../Shared/Divider';
-import SizeItem from '../SizePicker/SizeItem';
+import SizeItem from '../Shared/SizeItem';
 
 type CollectionItemProps = {
   item: ItemType;

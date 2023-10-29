@@ -4,8 +4,8 @@ import {ItemOptionsType, ItemType} from '../../models';
 import {GlobalStyles} from '../../constants/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import ColorPicker from '../ColorPicker/ColorPicker';
-import SizePicker from '../SizePicker/SizePicker';
+import ColorPicker from '../Shared/ColorPicker';
+import SizePicker from '../Shared/SizePicker';
 import Slider from '../Shared/Slider';
 import Button from '../Shared/Button';
 
