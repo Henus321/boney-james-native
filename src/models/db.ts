@@ -9,6 +9,7 @@ export type ItemType = {
   name: string;
   sizes: string[];
   slug: string;
+  type: string;
 };
 
 export type ItemOptionsType = {

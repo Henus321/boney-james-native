@@ -20,22 +20,12 @@ import ColorPicker from '../ColorPicker/ColorPicker';
 import Divider from '../Shared/Divider';
 import SizeItem from '../SizePicker/SizeItem';
 
-function renderSize(itemData: ListRenderItemInfo<string>) {
-  return (
-    <SizeItem
-      onPress={item => console.log('Add item: ' + item)}
-      size={itemData.item}
-      active={true}
-    />
-  );
-}
-
 type CollectionItemProps = {
   item: ItemType;
 };
 
 function CollectionItem({item}: CollectionItemProps) {
-  const {name, cost, options, sizes, slug} = item;
+  const {name, cost, options, sizes, slug, type} = item;
   const [currentColor, setCurrentColor] = useState(options[0].colorHex);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -66,7 +56,7 @@ function CollectionItem({item}: CollectionItemProps) {
           />
         </Pressable>
         <View style={styles.badge}>
-          <Text style={styles.badgeText}>NEW</Text>
+          <Text style={styles.badgeText}>{type.toUpperCase()}</Text>
         </View>
       </View>
       <View style={styles.details}>
@@ -79,7 +69,10 @@ function CollectionItem({item}: CollectionItemProps) {
           currentColor={currentColor}
           setCurrentColor={setCurrentColor}
         />
-        <Pressable onPress={() => console.log('Add to favorites')}>
+        <Pressable
+          onPress={() =>
+            console.log(`Add to favorites: ${item.slug} ${currentColor}`)
+          }>
           <Icon name="heart" size={28} color={GlobalStyles.colors.black} />
         </Pressable>
       </View>
@@ -94,13 +87,23 @@ function CollectionItem({item}: CollectionItemProps) {
           <View style={styles.modalContainer}>
             <Pressable
               style={styles.modal}
-              onPress={() => console.log('Add size to cart - late')}>
+              onPress={() => console.log(`Prevent modal close`)}>
               <Text style={styles.modalTitle}>Добавить в корзину</Text>
               <Divider />
               <FlatList
                 numColumns={4}
                 data={sizes}
-                renderItem={renderSize}
+                renderItem={itemData => (
+                  <SizeItem
+                    onPress={size =>
+                      console.log(
+                        `Add item: ${item.slug} ${currentColor} ${size}`,
+                      )
+                    }
+                    size={itemData.item}
+                    active={true}
+                  />
+                )}
                 keyExtractor={size => size}
                 columnWrapperStyle={{justifyContent: 'center', gap: 4}}
               />
