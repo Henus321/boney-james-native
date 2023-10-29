@@ -119,7 +119,6 @@ export default CollectionItem;
 const styles = StyleSheet.create({
   container: {
     width: '49%',
-    backgroundColor: GlobalStyles.colors.white,
     marginBottom: 20,
   },
   imageContainer: {

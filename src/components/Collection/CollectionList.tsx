@@ -30,6 +30,5 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     padding: 5,
-    backgroundColor: GlobalStyles.colors.white,
   },
 });

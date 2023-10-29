@@ -9,25 +9,25 @@ export const BottomTabsList: BottomTabsListType[] = [
   {
     name: 'CollectionScreen',
     title: 'Коллекция',
-    icon: 'calendar',
+    icon: 'list-outline',
     component: CollectionScreen,
   },
   {
     name: 'ShopsScreen',
     title: 'Магазины',
-    icon: 'calendar',
+    icon: 'pricetag-outline',
     component: ShopsScreen,
   },
   {
     name: 'CustomersScreen',
     title: 'Покупателям',
-    icon: 'calendar',
+    icon: 'information-circle-outline',
     component: CustomersScreen,
   },
   {
     name: 'ProfileScreen',
     title: 'Профиль',
-    icon: 'calendar',
+    icon: 'person-outline',
     component: ProfileScreen,
   },
 ];

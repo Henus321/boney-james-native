@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 5,
     gap: 12,
-    marginBottom: 40,
+    marginBottom: 30,
   },
   textContainer: {
     gap: 4,

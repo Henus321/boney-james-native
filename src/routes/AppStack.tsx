@@ -14,12 +14,12 @@ function AppStack() {
         <Stack.Screen
           name="AppScreen"
           component={BottomTabs}
-          options={{headerShown: false}}
+          options={{headerShown: false, headerTitle: 'Коллекция'}}
         />
         <Stack.Screen
           name="ItemScreen"
           component={ItemScreen}
-          //options={{presentation: 'modal'}}
+          options={{headerTitle: 'Пальто'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
