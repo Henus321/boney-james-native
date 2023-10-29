@@ -15,13 +15,13 @@ type ItemProps = {
 
 function Item({item}: ItemProps) {
   const {name, cost, description, options, sizes, slug} = item;
-  const [activeColor, setActiveColor] = useState(options[0].colorHex);
+  const [currentColor, setCurrentColor] = useState(options[0].colorHex);
   const [currentOption, setCurrentOption] = useState<ItemOptionsType>();
   const [currentSize, setCurrentSize] = useState(sizes[0]);
 
   useEffect(() => {
-    setCurrentOption(options.find(item => item.colorHex === activeColor));
-  }, [activeColor]);
+    setCurrentOption(options.find(item => item.colorHex === currentColor));
+  }, [currentColor]);
 
   return (
     <View style={styles.container}>
@@ -33,8 +33,8 @@ function Item({item}: ItemProps) {
       </View>
       <ColorPicker
         itemOptions={options}
-        activeColor={activeColor}
-        setActiveColor={setActiveColor}
+        currentColor={currentColor}
+        setCurrentColor={setCurrentColor}
       />
       <SizePicker
         sizes={sizes}
@@ -42,7 +42,10 @@ function Item({item}: ItemProps) {
         setCurrentSize={setCurrentSize}
       />
       <View style={styles.actions}>
-        <Button onPress={() => console.log('Add to cart: ' + slug)}>
+        <Button
+          onPress={() =>
+            console.log(`Add to cart: ${slug} ${currentColor} ${currentSize}`)
+          }>
           В КОРЗИНУ
         </Button>
         <Icon name="heart" size={20} color={GlobalStyles.colors.black} />

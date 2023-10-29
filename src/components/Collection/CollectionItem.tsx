@@ -36,7 +36,7 @@ type CollectionItemProps = {
 
 function CollectionItem({item}: CollectionItemProps) {
   const {name, cost, options, sizes, slug} = item;
-  const [activeColor, setActiveColor] = useState(options[0].colorHex);
+  const [currentColor, setCurrentColor] = useState(options[0].colorHex);
   const [modalVisible, setModalVisible] = useState(false);
 
   const navigation =
@@ -53,7 +53,7 @@ function CollectionItem({item}: CollectionItemProps) {
       <View style={styles.imageContainer}>
         <Image
           source={{
-            uri: getTitlePhoto(options, activeColor),
+            uri: getTitlePhoto(options, currentColor),
           }}
           style={styles.image}
         />
@@ -76,8 +76,8 @@ function CollectionItem({item}: CollectionItemProps) {
       <View style={styles.actions}>
         <ColorPicker
           itemOptions={options}
-          activeColor={activeColor}
-          setActiveColor={setActiveColor}
+          currentColor={currentColor}
+          setCurrentColor={setCurrentColor}
         />
         <Pressable onPress={() => console.log('Add to favorites')}>
           <Icon name="heart" size={28} color={GlobalStyles.colors.black} />

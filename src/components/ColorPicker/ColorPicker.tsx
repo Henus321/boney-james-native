@@ -4,27 +4,27 @@ import {GlobalStyles} from '../../constants/styles';
 
 type ColorPickerProps = {
   itemOptions: ItemOptionsType[];
-  activeColor: React.CSSProperties['backgroundColor'];
-  setActiveColor: (arg: React.CSSProperties['backgroundColor']) => void;
+  currentColor: React.CSSProperties['backgroundColor'];
+  setCurrentColor: (arg: React.CSSProperties['backgroundColor']) => void;
   style?: StyleProp<ViewStyle>;
 };
 
 const ColorPicker = ({
   itemOptions,
-  activeColor,
-  setActiveColor,
+  currentColor,
+  setCurrentColor,
   style,
 }: ColorPickerProps) => {
   return (
     <View style={[styles.colorPicker, style]}>
       {itemOptions.map(({colorHex, id}) => (
         <Pressable
-          onPress={() => setActiveColor(colorHex)}
+          onPress={() => setCurrentColor(colorHex)}
           key={id}
           style={[
             styles.colorPickerItem,
             {backgroundColor: colorHex},
-            activeColor === colorHex && {
+            currentColor === colorHex && {
               borderColor: GlobalStyles.colors.border,
               borderStyle: 'solid',
               borderWidth: 5,
