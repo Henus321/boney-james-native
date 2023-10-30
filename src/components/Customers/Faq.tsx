@@ -1,4 +1,4 @@
-import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {AccordionType} from '../../models';
 
 import Accordion from '../Shared/Accordion';
@@ -11,9 +11,11 @@ function Faq({faqList}: FaqProps) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {faqList.map((item, index) => (
-          <Accordion key={`faq-${index}`} item={item} />
-        ))}
+        <View style={styles.accordionContainer}>
+          {faqList.map((item, index) => (
+            <Accordion key={`faq-${index}`} item={item} />
+          ))}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -24,6 +26,9 @@ export default Faq;
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    backgroundColor: 'olive',
+  },
+  accordionContainer: {
+    gap: 10,
+    padding: 5,
   },
 });

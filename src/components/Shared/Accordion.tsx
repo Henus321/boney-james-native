@@ -20,7 +20,7 @@ type AccordionProps = {
 };
 
 function Accordion({item}: AccordionProps) {
-  const {title, text} = item;
+  const {label, value} = item;
   const textRef = useAnimatedRef();
   const heightValue = useSharedValue(0);
 
@@ -53,8 +53,8 @@ function Accordion({item}: AccordionProps) {
           }
           open.value = !open.value;
         }}
-        style={styles.titleContainer}>
-        <Text style={styles.titleText}>{title}</Text>
+        style={styles.labelContainer}>
+        <Text style={styles.label}>{label}</Text>
         <Animated.View style={iconStyle}>
           <Icon
             name="chevron-down-outline"
@@ -64,8 +64,12 @@ function Accordion({item}: AccordionProps) {
         </Animated.View>
       </Pressable>
       <Animated.View style={heightAnimationStyle}>
-        <Animated.View ref={textRef} style={styles.answerContainer}>
-          <Text>{text}</Text>
+        <Animated.View ref={textRef} style={styles.valueContainer}>
+          {typeof value === 'string' ? (
+            <Text style={styles.value}>{value}</Text>
+          ) : (
+            <View style={styles.value}>{value}</View>
+          )}
         </Animated.View>
       </Animated.View>
     </View>
@@ -76,27 +80,28 @@ export default Accordion;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'crimson',
-    marginHorizontal: 10,
-    marginVertical: 10,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: '#0f56b3',
+    backgroundColor: GlobalStyles.colors.darkMilk,
     overflow: 'hidden',
   },
-  titleContainer: {
-    padding: 20,
+  labelContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  titleText: {
+  label: {
     fontSize: 16,
+    textTransform: 'uppercase',
     color: 'black',
   },
-  answerContainer: {
+  valueContainer: {
     position: 'absolute',
     width: '100%',
     top: 0,
+  },
+  value: {
+    marginHorizontal: 10,
+    marginBottom: 16,
   },
 });

@@ -7,7 +7,7 @@ import {db} from '../utils/firebase';
 
 import ErrorView from '../components/Shared/ErrorView';
 import Item from '../components/Item/Item';
-import Footer from '../components/Footer/Footer';
+import Footer from '../components/Shared/Footer';
 
 function ItemScreen() {
   const {params} = useRoute<RouteProp<RootStackParamList, 'ItemScreen'>>();

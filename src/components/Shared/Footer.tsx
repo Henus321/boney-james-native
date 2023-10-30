@@ -4,7 +4,7 @@ import {Pressable} from 'react-native';
 import {SocialNetworkList} from '../../constants/shared';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import Divider from '../Shared/Divider';
+import Divider from './Divider';
 
 function Footer() {
   return (

@@ -1,6 +1,6 @@
 export type AccordionType = {
-  title: string;
-  text: string;
+  label: string;
+  value: string | JSX.Element;
 };
 
 export type SocialNetworkType = {
