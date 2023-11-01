@@ -1,14 +1,18 @@
 import {useEffect, useState} from 'react';
-import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
+import {SafeAreaView, FlatList, StyleSheet, View} from 'react-native';
 import {collectionGroup, getDocs, query} from 'firebase/firestore';
 import {db} from '../utils/firebase';
 import {ShopType} from '../models';
 
 import ErrorView from '../components/Shared/ErrorView';
 import ShopCard from '../components/Shops/ShopCard';
+import Input from '../components/Shared/Input';
 
 function ShopsScreen() {
   const [shops, setShops] = useState<ShopType[]>();
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [type, setType] = useState('');
 
   useEffect(() => {
     const fetch = async () => {
@@ -29,9 +33,15 @@ function ShopsScreen() {
   if (!shops) return <ErrorView />;
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.form}>
+        <Input value={name} onChange={setName} label="Название" />
+        <Input value={city} onChange={setCity} label="Город" />
+        {/*need select here*/}
+        <Input value={type} onChange={setType} label="Тип" />
+      </View>
       <FlatList
-        style={styles.container}
+        style={styles.list}
         data={shops}
         renderItem={({item}) => <ShopCard shop={item} />}
         keyExtractor={item => item.name}
@@ -44,7 +54,12 @@ export default ShopsScreen;
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
-    padding: 5,
+    flex: 1,
+  },
+  list: {
+    paddingHorizontal: 5,
+  },
+  form: {
+    marginTop: 10,
   },
 });
