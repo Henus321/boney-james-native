@@ -62,3 +62,41 @@ export const SizeTableData = {
     hips: ['92', '96', '100', '104'],
   },
 };
+
+export const CITIES_OPTIONS = [
+  {
+    label: ' ',
+    value: '',
+  },
+  {
+    label: 'Москва',
+    value: 'moscow',
+  },
+  {
+    label: 'Санкт-Петербург',
+    value: 'saint-petersburg',
+  },
+  {
+    label: 'Владивосток',
+    value: 'vladivostok',
+  },
+];
+
+export const SHOP_TYPE_OPTIONS = [
+  {
+    label: ' ',
+    value: '',
+  },
+  {
+    label: 'Одежда для женщин',
+    value: 'woman',
+  },
+  {
+    label: 'Одежда для мужчин',
+    value: 'man',
+  },
+  {
+    label: 'Одежда для детей',
+    value: 'children',
+  },
+];

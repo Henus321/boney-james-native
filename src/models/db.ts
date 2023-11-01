@@ -18,3 +18,18 @@ export type ItemOptionsType = {
   id: string;
   photos: string[];
 };
+
+export type ShopType = {
+  name: string;
+  subway: string;
+  street: string;
+  time: string;
+  phone: string;
+  type: ShopOptionType;
+  city: string;
+};
+
+export type ShopOptionType = {
+  value: string[];
+  label: string;
+};
