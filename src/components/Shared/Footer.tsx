@@ -1,19 +1,20 @@
-import {Linking, StyleSheet, Text, View} from 'react-native';
+import {Linking, StyleSheet, View} from 'react-native';
 import {GlobalStyles} from '../../constants/styles';
 import {Pressable} from 'react-native';
 import {SocialNetworkList} from '../../constants/shared';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Divider from './Divider';
+import AppText from './AppText';
 
 function Footer() {
   return (
     <View style={styles.container}>
-      <Text>СЛУЖБА ПОДДЕРЖКИ</Text>
-      <Text>+7 999 999 99 99</Text>
-      <Text>support@boney-james.com</Text>
+      <AppText>СЛУЖБА ПОДДЕРЖКИ</AppText>
+      <AppText>+7 999 999 99 99</AppText>
+      <AppText>support@boney-james.com</AppText>
       <Divider />
-      <Text>СЛЕДИТЕ ЗА НАМИ</Text>
+      <AppText>СЛЕДИТЕ ЗА НАМИ</AppText>
       <View style={styles.socialContainer}>
         {SocialNetworkList.map(social => (
           <Pressable
@@ -28,7 +29,7 @@ function Footer() {
           </Pressable>
         ))}
       </View>
-      <Text>2023 &#169; Все права защищены</Text>
+      <AppText>2023 &#169; Все права защищены</AppText>
     </View>
   );
 }

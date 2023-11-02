@@ -1,9 +1,11 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {GlobalStyles} from '../constants/styles';
 import {BottomTabsList} from '../constants/menu';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {BottomTabsStackParamList} from '../models';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import AppText from '../components/Shared/AppText';
 
 const Tabs = createBottomTabNavigator<BottomTabsStackParamList>();
 
@@ -19,7 +21,7 @@ function BottomTabs() {
           options={{
             title: title,
             tabBarLabel: ({children, focused}) => (
-              <Text
+              <AppText
                 style={[
                   styles.tabsLabel,
                   {
@@ -29,7 +31,7 @@ function BottomTabs() {
                   },
                 ]}>
                 {children}
-              </Text>
+              </AppText>
             ),
             tabBarIcon: ({size, focused}) => (
               <Icon

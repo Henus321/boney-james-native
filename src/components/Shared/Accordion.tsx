@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {AccordionType} from '../../models';
 import {Pressable} from 'react-native';
 import {GlobalStyles} from '../../constants/styles';
@@ -14,6 +14,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+
+import AppText from './AppText';
 
 type AccordionProps = {
   item: AccordionType;
@@ -54,7 +56,7 @@ function Accordion({item}: AccordionProps) {
           open.value = !open.value;
         }}
         style={styles.labelContainer}>
-        <Text style={styles.label}>{label}</Text>
+        <AppText style={styles.label}>{label}</AppText>
         <Animated.View style={iconStyle}>
           <Icon
             name="chevron-down-outline"
@@ -66,7 +68,7 @@ function Accordion({item}: AccordionProps) {
       <Animated.View style={heightAnimationStyle}>
         <Animated.View ref={textRef} style={styles.valueContainer}>
           {typeof value === 'string' ? (
-            <Text style={styles.value}>{value}</Text>
+            <AppText style={styles.value}>{value}</AppText>
           ) : (
             <View style={styles.value}>{value}</View>
           )}

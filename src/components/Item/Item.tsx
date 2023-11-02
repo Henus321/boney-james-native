@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {ItemOptionsType, ItemType} from '../../models';
 import {GlobalStyles} from '../../constants/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -8,6 +8,7 @@ import ColorPicker from '../Shared/ColorPicker';
 import SizePicker from '../Shared/SizePicker';
 import Slider from '../Shared/Slider';
 import Button from '../Shared/Button';
+import AppText from '../Shared/AppText';
 
 type ItemProps = {
   item: ItemType;
@@ -27,9 +28,9 @@ function Item({item}: ItemProps) {
     <View style={styles.container}>
       {currentOption?.photos && <Slider data={currentOption?.photos} />}
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{name}</Text>
-        <Text style={styles.text}>{cost} &#8381;</Text>
-        <Text style={styles.text}>{description}</Text>
+        <AppText style={styles.title}>{name}</AppText>
+        <AppText style={styles.text}>{cost} &#8381;</AppText>
+        <AppText style={styles.text}>{description}</AppText>
       </View>
       <ColorPicker
         itemOptions={options}

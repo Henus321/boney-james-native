@@ -1,9 +1,11 @@
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
+
+import AppText from './AppText';
 
 function ErrorView() {
   return (
     <View>
-      <Text>ErrorView</Text>
+      <AppText>ErrorView</AppText>
     </View>
   );
 }

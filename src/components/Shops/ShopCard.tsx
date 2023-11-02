@@ -1,8 +1,10 @@
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import {ShopType} from '../../models';
 import {StyleSheet} from 'react-native';
 import {CITIES_OPTIONS} from '../../constants/shared';
 import {GlobalStyles} from '../../constants/styles';
+
+import AppText from '../Shared/AppText';
 
 type ShopCardProps = {
   shop: ShopType;
@@ -15,14 +17,14 @@ function ShopCard({shop}: ShopCardProps) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{shop.name}</Text>
+      <AppText style={styles.title}>{shop.name}</AppText>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>{localeCityName}</Text>
-        <Text style={styles.text}>{shop.subway}</Text>
-        <Text style={styles.text}>{shop.street}</Text>
-        <Text style={styles.text}>{shop.time}</Text>
-        <Text style={styles.text}>{shop.phone}</Text>
-        <Text style={styles.text}>{shop.type.label}</Text>
+        <AppText style={styles.text}>{localeCityName}</AppText>
+        <AppText style={styles.text}>{shop.subway}</AppText>
+        <AppText style={styles.text}>{shop.street}</AppText>
+        <AppText style={styles.text}>{shop.time}</AppText>
+        <AppText style={styles.text}>{shop.phone}</AppText>
+        <AppText style={styles.text}>{shop.type.label}</AppText>
       </View>
     </View>
   );

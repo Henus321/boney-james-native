@@ -1,9 +1,11 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
+
+import AppText from '../components/Shared/AppText';
 
 function ProfileScreen() {
   return (
     <View>
-      <Text>Profile Screen</Text>
+      <AppText>Profile Screen</AppText>
     </View>
   );
 }

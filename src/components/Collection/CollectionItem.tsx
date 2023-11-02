@@ -5,7 +5,6 @@ import {
   Modal,
   Pressable,
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
 import {ItemType, RootStackParamList} from '../../models';
@@ -18,6 +17,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ColorPicker from '../Shared/ColorPicker';
 import Divider from '../Shared/Divider';
 import SizeItem from '../Shared/SizeItem';
+import AppText from '../Shared/AppText';
 
 type CollectionItemProps = {
   item: ItemType;
@@ -55,12 +55,12 @@ function CollectionItem({item}: CollectionItemProps) {
           />
         </Pressable>
         <View style={styles.badge}>
-          <Text style={styles.badgeText}>{type.toUpperCase()}</Text>
+          <AppText style={styles.badgeText}>{type.toUpperCase()}</AppText>
         </View>
       </View>
       <View style={styles.details}>
-        <Text>{name}</Text>
-        <Text>{cost} &#8381;</Text>
+        <AppText>{name}</AppText>
+        <AppText>{cost} &#8381;</AppText>
       </View>
       <View style={styles.actions}>
         <ColorPicker
@@ -87,7 +87,7 @@ function CollectionItem({item}: CollectionItemProps) {
             <Pressable
               style={styles.modal}
               onPress={() => console.log(`Prevent modal close`)}>
-              <Text style={styles.modalTitle}>Добавить в корзину</Text>
+              <AppText style={styles.modalTitle}>Добавить в корзину</AppText>
               <Divider />
               <FlatList
                 numColumns={4}

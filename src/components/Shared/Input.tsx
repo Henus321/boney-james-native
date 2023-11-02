@@ -1,5 +1,7 @@
-import {StyleSheet, TextInput, View, Text} from 'react-native';
+import {StyleSheet, TextInput, View} from 'react-native';
 import {GlobalStyles} from '../../constants/styles';
+
+import AppText from './AppText';
 
 type InputProps = {
   value: string;
@@ -10,7 +12,7 @@ type InputProps = {
 function Input({value, onChange, label}: InputProps) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{label}</Text>
+      <AppText style={styles.title}>{label}</AppText>
       <TextInput
         style={styles.input}
         defaultValue={value}
@@ -33,6 +35,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 20,
+    fontFamily: 'Montserrat',
     paddingHorizontal: 10,
     paddingTop: 5,
     paddingBottom: 10,

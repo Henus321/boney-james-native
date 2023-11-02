@@ -1,12 +1,7 @@
-import {
-  Pressable,
-  StyleProp,
-  StyleSheet,
-  Text,
-  View,
-  ViewStyle,
-} from 'react-native';
+import {Pressable, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {GlobalStyles} from '../../constants/styles';
+
+import AppText from './AppText';
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -21,9 +16,9 @@ function Button({children, onPress, active = false, style}: ButtonProps) {
       onPress={onPress}
       style={({pressed}) => pressed && styles.pressed}>
       <View style={[styles.button, active && styles.active, style]}>
-        <Text style={[styles.buttonText, active && styles.buttonTextActive]}>
+        <AppText style={[styles.buttonText, active && styles.buttonTextActive]}>
           {children}
-        </Text>
+        </AppText>
       </View>
     </Pressable>
   );

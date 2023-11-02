@@ -1,6 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {SizeTableData} from '../../constants/shared';
 import {GlobalStyles} from '../../constants/styles';
+
+import AppText from '../Shared/AppText';
 
 function SizeTable() {
   const {head, data} = SizeTableData;
@@ -12,7 +14,7 @@ function SizeTable() {
       <View style={styles.row}>
         {head.map(item => (
           <View key={item} style={styles.cell}>
-            <Text>{item}</Text>
+            <AppText>{item}</AppText>
           </View>
         ))}
       </View>
@@ -28,7 +30,7 @@ function SizeTable() {
           key={key}>
           {Object.values(data).map((cell, key) => (
             <View key={key} style={styles.cell}>
-              <Text>{cell[index]}</Text>
+              <AppText>{cell[index]}</AppText>
             </View>
           ))}
         </View>
