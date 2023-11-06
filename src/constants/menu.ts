@@ -2,7 +2,7 @@ import {BottomTabsListType} from '../models';
 
 import CollectionScreen from '../screens/CollectionScreen';
 import CustomersScreen from '../screens/CustomersScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import CartScreen from '../screens/CartScreen';
 import ShopsScreen from '../screens/ShopsScreen';
 
 export const BottomTabsList: BottomTabsListType[] = [
@@ -25,9 +25,9 @@ export const BottomTabsList: BottomTabsListType[] = [
     component: CustomersScreen,
   },
   {
-    name: 'ProfileScreen',
-    title: 'Профиль',
-    icon: 'person-outline',
-    component: ProfileScreen,
+    name: 'CartScreen',
+    title: 'Корзина',
+    icon: 'cart-outline',
+    component: CartScreen,
   },
 ];

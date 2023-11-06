@@ -13,7 +13,7 @@ export type BottomTabsStackParamList = {
   CollectionScreen: {name: string; title: string; icon: string};
   ShopsScreen: undefined;
   CustomersScreen: undefined;
-  ProfileScreen: undefined;
+  CartScreen: undefined;
 };
 
 export type BottomTabsListType = {
