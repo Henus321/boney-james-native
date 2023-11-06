@@ -4,8 +4,8 @@ import {GlobalStyles} from '../../constants/styles';
 
 type ColorPickerProps = {
   itemOptions: ItemOptionsType[];
-  currentColor: React.CSSProperties['backgroundColor'];
-  setCurrentColor: (arg: React.CSSProperties['backgroundColor']) => void;
+  currentColor: string;
+  setCurrentColor: (arg: string) => void;
   style?: StyleProp<ViewStyle>;
 };
 

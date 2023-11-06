@@ -14,7 +14,7 @@ export type ItemType = {
 
 export type ItemOptionsType = {
   color: string;
-  colorHex: React.CSSProperties['backgroundColor'];
+  colorHex: string;
   id: string;
   photos: string[];
 };
@@ -33,3 +33,18 @@ export type ShopOptionType = {
   value: string[];
   label: string;
 };
+
+export type CartItemType = {
+  size: string;
+  color: string;
+  quantity: number;
+} & ItemType;
+
+export type CartItemRawType = {
+  size: string;
+  color: string;
+  quantity: number;
+} & Omit<ItemType, 'options' | 'sizes'> & {
+    options: string;
+    sizes: string;
+  };

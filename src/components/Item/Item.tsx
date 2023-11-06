@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {ItemOptionsType, ItemType} from '../../models';
+import {CartItemType, ItemOptionsType, ItemType} from '../../models';
 import {GlobalStyles} from '../../constants/styles';
+import {insertCartItem} from '../../utils/sqlite';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ColorPicker from '../Shared/ColorPicker';
@@ -19,10 +20,15 @@ function Item({item}: ItemProps) {
   const [currentColor, setCurrentColor] = useState(options[0].colorHex);
   const [currentOption, setCurrentOption] = useState<ItemOptionsType>();
   const [currentSize, setCurrentSize] = useState(sizes[0]);
+  // !!!NEED QUANTITY!!!
 
   useEffect(() => {
     setCurrentOption(options.find(item => item.colorHex === currentColor));
   }, [currentColor]);
+
+  const addToCart = (item: CartItemType) => {
+    insertCartItem(item);
+  };
 
   return (
     <View style={styles.container}>
@@ -44,8 +50,15 @@ function Item({item}: ItemProps) {
       />
       <View style={styles.actions}>
         <Button
-          onPress={() =>
-            console.log(`Add to cart: ${slug} ${currentColor} ${currentSize}`)
+          onPress={
+            () =>
+              addToCart({
+                ...item,
+                size: currentSize,
+                color: currentColor,
+                quantity: 1,
+              })
+            //console.log(`Add to cart: ${slug} ${currentColor} ${currentSize}`)
           }>
           В КОРЗИНУ
         </Button>
