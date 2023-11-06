@@ -1,35 +1,24 @@
 import {View} from 'react-native';
-import {useCallback, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {CartItemType} from '../models';
-import {createTable, getCartItems, getDBConnection} from '../utils/sqlite';
+import {useIsFocused} from '@react-navigation/native';
+import {getCartItems} from '../utils/sqlite';
 
 import AppText from '../components/Shared/AppText';
 
 function CartScreen() {
-  const [cartInitialized, setCartInitialized] = useState(false);
   const [cart, setCart] = useState<CartItemType[]>();
 
-  const loadSqliteCallback = useCallback(async () => {
-    try {
-      const db = await getDBConnection();
-      await createTable(db);
-      const storedCartItems = await getCartItems(db);
-      if (storedCartItems.length) setCart(storedCartItems);
-    } catch (error) {
-      // handle error
-      console.error(error);
-    }
-  }, []);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    loadSqliteCallback()
-      .then(() => setCartInitialized(true))
-      .catch(err => console.log(err));
-  }, [loadSqliteCallback]);
+    async function loadCart() {
+      const storedCartItems = await getCartItems();
+      setCart(storedCartItems);
+    }
 
-  if (!cartInitialized) {
-    return <AppText>Cart loading...</AppText>;
-  }
+    if (isFocused) loadCart();
+  }, [isFocused]);
 
   return (
     <View>

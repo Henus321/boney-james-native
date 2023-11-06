@@ -2,7 +2,8 @@ import {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {CartItemType, ItemOptionsType, ItemType} from '../../models';
 import {GlobalStyles} from '../../constants/styles';
-import {insertCartItem} from '../../utils/sqlite';
+import {insertCartItem, getDBConnection} from '../../utils/sqlite';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ColorPicker from '../Shared/ColorPicker';
@@ -16,7 +17,7 @@ type ItemProps = {
 };
 
 function Item({item}: ItemProps) {
-  const {name, cost, description, options, sizes, slug} = item;
+  const {name, cost, description, options, sizes} = item;
   const [currentColor, setCurrentColor] = useState(options[0].colorHex);
   const [currentOption, setCurrentOption] = useState<ItemOptionsType>();
   const [currentSize, setCurrentSize] = useState(sizes[0]);
@@ -50,15 +51,13 @@ function Item({item}: ItemProps) {
       />
       <View style={styles.actions}>
         <Button
-          onPress={
-            () =>
-              addToCart({
-                ...item,
-                size: currentSize,
-                color: currentColor,
-                quantity: 1,
-              })
-            //console.log(`Add to cart: ${slug} ${currentColor} ${currentSize}`)
+          onPress={() =>
+            addToCart({
+              ...item,
+              size: currentSize,
+              color: currentColor,
+              quantity: 1,
+            })
           }>
           В КОРЗИНУ
         </Button>
