@@ -131,6 +131,26 @@ export const addCartItem = async (item: CartItemType) => {
   return promise;
 };
 
+export const deleteCartItem = async (cartItem: CartItemType) => {
+  const db = await getDBConnection();
+  const promise = new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `DELETE FROM ${tableName} WHERE id=?`,
+        [cartItem.id],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, error) => {
+          reject(error);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
 // FOR DEVELOPMENT
 export const drop = async () => {
   const db = await getDBConnection();
