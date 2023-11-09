@@ -103,7 +103,7 @@ function CollectionItem({item}: CollectionItemProps) {
                     active={true}
                   />
                 )}
-                keyExtractor={size => size}
+                keyExtractor={size => size.replace(/ /g, '')}
                 columnWrapperStyle={{justifyContent: 'center', gap: 4}}
               />
             </Pressable>

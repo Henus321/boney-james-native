@@ -35,6 +35,7 @@ export type ShopOptionType = {
 };
 
 export type CartItemType = {
+  id?: string;
   size: string;
   color: string;
   quantity: number;

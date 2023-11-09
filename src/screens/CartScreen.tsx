@@ -1,30 +1,35 @@
-import {View} from 'react-native';
-import {useEffect, useState} from 'react';
-import {CartItemType} from '../models';
-import {useIsFocused} from '@react-navigation/native';
-import {getCartItems} from '../utils/sqlite';
+import {Pressable, StyleSheet, View} from 'react-native';
+import {useContext} from 'react';
+import {CartContext} from '../context/cart';
 
 import AppText from '../components/Shared/AppText';
 
 function CartScreen() {
-  const [cart, setCart] = useState<CartItemType[]>();
-
-  const isFocused = useIsFocused();
-
-  useEffect(() => {
-    async function loadCart() {
-      const storedCartItems = await getCartItems();
-      setCart(storedCartItems);
-    }
-
-    if (isFocused) loadCart();
-  }, [isFocused]);
-
+  const {cart} = useContext(CartContext);
   return (
     <View>
-      {cart && cart.map(item => <AppText key={item.slug}>{item.name}</AppText>)}
+      {cart &&
+        !!cart.length &&
+        cart.map(item => (
+          <Pressable
+            style={styles.item}
+            key={item.id}
+            onPress={() => console.log(item.id)}>
+            <AppText>
+              {item.id} - {item.quantity}
+            </AppText>
+          </Pressable>
+        ))}
     </View>
   );
 }
 
 export default CartScreen;
+
+const styles = StyleSheet.create({
+  item: {
+    padding: 10,
+    margin: 10,
+    backgroundColor: 'olivedrab',
+  },
+});

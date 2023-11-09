@@ -1,5 +1,6 @@
 import {openDatabase} from 'react-native-sqlite-storage';
 import {CartItemType} from '../models';
+import {getCartItemId} from './helpers';
 
 const tableName = 'bj';
 
@@ -13,7 +14,8 @@ export const initSqlite = async () => {
     db.transaction(tx => {
       tx.executeSql(
         `CREATE TABLE IF NOT EXISTS ${tableName} (
-			slug TEXT PRIMARY KEY NOT NULL,
+			id TEXT PRIMARY KEY NOT NULL,
+			slug TEXT NOT NULL,
 			size TEXT NOT NULL,
 			color TEXT NOT NULL,
 			quantity INTEGER NOT NULL,
@@ -50,6 +52,7 @@ export const getCartItems = async () => {
 
           for (const dp of result.rows.raw()) {
             cartItems.push({
+              id: dp.id,
               color: dp.color,
               cost: dp.cost,
               description: dp.description,
@@ -75,13 +78,35 @@ export const getCartItems = async () => {
   return promise;
 };
 
-export const insertCartItem = async (item: CartItemType) => {
+export const updateCartItem = async (item: CartItemType) => {
   const db = await getDBConnection();
   const promise = new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        `INSERT INTO ${tableName} (size, color, quantity, options, cost, description, name, sizes, slug, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        `UPDATE ${tableName} set quantity=? where id=?`,
+        [item.quantity, item.id],
+        (_, result) => {
+          resolve(result);
+        },
+        (_, error) => {
+          console.log(_, error);
+          reject(error);
+        },
+      );
+    });
+  });
+
+  return promise;
+};
+
+export const addCartItem = async (item: CartItemType) => {
+  const db = await getDBConnection();
+  const promise = new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `INSERT INTO ${tableName} (id, size, color, quantity, options, cost, description, name, sizes, slug, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
+          getCartItemId(item),
           item.size,
           item.color,
           item.quantity,
@@ -104,4 +129,17 @@ export const insertCartItem = async (item: CartItemType) => {
   });
 
   return promise;
+};
+
+// FOR DEVELOPMENT
+export const drop = async () => {
+  const db = await getDBConnection();
+  db.transaction(tx => {
+    tx.executeSql(
+      `DROP TABLE ${tableName};`,
+      [],
+      () => {},
+      () => {},
+    );
+  });
 };
