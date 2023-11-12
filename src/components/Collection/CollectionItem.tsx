@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import {
   FlatList,
   Image,
@@ -12,6 +12,7 @@ import {getTitlePhoto} from '../../utils/helpers';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/core';
 import {GlobalStyles} from '../../constants/styles';
+import {CartContext} from '../../context/cart';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ColorPicker from '../Shared/ColorPicker';
@@ -24,6 +25,7 @@ type CollectionItemProps = {
 };
 
 function CollectionItem({item}: CollectionItemProps) {
+  const {addToCart} = useContext(CartContext);
   const {name, cost, options, sizes, slug, type} = item;
   const [currentColor, setCurrentColor] = useState(options[0].colorHex);
   const [modalVisible, setModalVisible] = useState(false);
@@ -95,9 +97,12 @@ function CollectionItem({item}: CollectionItemProps) {
                 renderItem={itemData => (
                   <SizeItem
                     onPress={size =>
-                      console.log(
-                        `Add item: ${item.slug} ${currentColor} ${size}`,
-                      )
+                      addToCart({
+                        ...item,
+                        quantity: 1,
+                        size,
+                        color: currentColor,
+                      })
                     }
                     size={itemData.item}
                     active={true}
