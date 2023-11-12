@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useContext} from 'react';
 import {CartContext} from '../context/cart';
 
@@ -9,16 +9,20 @@ function CartScreen() {
   const {cart} = useContext(CartContext);
 
   return (
-    <View style={styles.container}>
-      {cart && !!cart.length ? (
-        cart.map(cartItem => <CartCard key={cartItem.id} cartItem={cartItem} />)
-      ) : (
-        <View style={styles.emptyCart}>
-          <Text style={styles.emptyCartTitle}>Пусто!</Text>
-          <Text>Добавьте сюда товары</Text>
-        </View>
-      )}
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        {cart && !!cart.length ? (
+          cart.map(cartItem => (
+            <CartCard key={cartItem.id} cartItem={cartItem} />
+          ))
+        ) : (
+          <View style={styles.emptyCart}>
+            <Text style={styles.emptyCartTitle}>Пусто!</Text>
+            <Text>Добавьте сюда товары</Text>
+          </View>
+        )}
+      </View>
+    </ScrollView>
   );
 }
 
@@ -27,6 +31,8 @@ export default CartScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 5,
+    gap: 10,
   },
   emptyCart: {
     flex: 1,
