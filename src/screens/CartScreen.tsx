@@ -1,36 +1,23 @@
-import {Pressable, StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {useContext} from 'react';
 import {CartContext} from '../context/cart';
-import {deleteCartItem} from '../utils/sqlite';
-import {CartItemType} from '../models';
 
-import AppText from '../components/Shared/AppText';
+import CartCard from '../components/Cart/CartCard';
+import {GlobalStyles} from '../constants/styles';
 
 function CartScreen() {
-  const {cart, setCart} = useContext(CartContext);
-
-  const handleDelete = (cartItem: CartItemType) => {
-    deleteCartItem(cartItem)
-      .then(() =>
-        setCart(prev => [...prev.filter(item => item.id !== cartItem.id)]),
-      )
-      .catch(() => console.log('Cant delete cart item!'));
-  };
+  const {cart} = useContext(CartContext);
 
   return (
-    <View>
-      {cart &&
-        !!cart.length &&
-        cart.map(cartItem => (
-          <Pressable
-            style={styles.cartItem}
-            key={cartItem.id}
-            onPress={() => handleDelete(cartItem)}>
-            <AppText>
-              {cartItem.id} - {cartItem.quantity}
-            </AppText>
-          </Pressable>
-        ))}
+    <View style={styles.container}>
+      {cart && !!cart.length ? (
+        cart.map(cartItem => <CartCard key={cartItem.id} cartItem={cartItem} />)
+      ) : (
+        <View style={styles.emptyCart}>
+          <Text style={styles.emptyCartTitle}>Пусто!</Text>
+          <Text>Добавьте сюда товары</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -38,9 +25,18 @@ function CartScreen() {
 export default CartScreen;
 
 const styles = StyleSheet.create({
-  cartItem: {
-    padding: 10,
-    margin: 10,
-    backgroundColor: 'olivedrab',
+  container: {
+    flex: 1,
+  },
+  emptyCart: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 'auto',
+    marginVertical: 'auto',
+  },
+  emptyCartTitle: {
+    fontSize: GlobalStyles.fonts.medium,
+    marginBottom: 2,
   },
 });

@@ -1,18 +1,25 @@
 import {createContext, useState, useEffect} from 'react';
 import {CartItemType} from '../models';
-import {addCartItem, getCartItems, updateCartItem} from '../utils/sqlite';
+import {
+  addCartItem,
+  deleteCartItem,
+  getCartItems,
+  updateCartItem,
+} from '../utils/sqlite';
 import {getCartItemId} from '../utils/helpers';
 
 export type CartContextState = {
   cart: CartItemType[];
   setCart: React.Dispatch<React.SetStateAction<CartItemType[]>>;
   addToCart: (item: CartItemType) => void;
+  deleteFromCart: (item: CartItemType) => void;
 };
 
 export const CartContext = createContext<CartContextState>({
   cart: [],
   setCart: () => {},
   addToCart: () => {},
+  deleteFromCart: () => {},
 });
 
 export const CartProvider = ({children}: {children: React.ReactNode}) => {
@@ -53,10 +60,23 @@ export const CartProvider = ({children}: {children: React.ReactNode}) => {
     }
   };
 
+  const deleteFromCart = (cartItem: CartItemType) => {
+    if (!cartItem.id) {
+      console.log('Error! Cant find coat id');
+      return;
+    }
+    deleteCartItem(cartItem)
+      .then(() =>
+        setCart(prev => [...prev.filter(item => item.id !== cartItem.id)]),
+      )
+      .catch(() => console.log('Cant delete cart item!'));
+  };
+
   const value = {
     cart,
     setCart,
     addToCart,
+    deleteFromCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
