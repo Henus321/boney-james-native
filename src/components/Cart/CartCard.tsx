@@ -4,8 +4,11 @@ import {CartContext} from '../../context/cart';
 import {useContext} from 'react';
 import {getTitlePhoto} from '../../utils/helpers';
 import {GlobalStyles} from '../../constants/styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import AppText from '../Shared/AppText';
+import Button from '../Shared/Button';
+import ColorItem from '../Shared/ColorItem';
 
 type CartCardProps = {
   cartItem: CartItemType;
@@ -25,7 +28,8 @@ const CartCard = ({cartItem}: CartCardProps) => {
     type,
     id,
   } = cartItem;
-  const {deleteFromCart} = useContext(CartContext);
+  const {addToCart, reduceItemFromCart, deleteItemFromCart} =
+    useContext(CartContext);
   // onPress={() => deleteFromCart(cartItem)}
 
   return (
@@ -41,16 +45,32 @@ const CartCard = ({cartItem}: CartCardProps) => {
         <AppText style={styles.text}>Цена: {cost}</AppText>
         <AppText style={styles.text}>Размер: {size}</AppText>
         {/* COLOR ITEM HERE*/}
-        <AppText style={styles.text}>Цвет: {color}</AppText>
+        <View style={styles.color}>
+          <AppText style={styles.text}>Цвет: </AppText>
+          <ColorItem color={color} size={18} />
+        </View>
+
         <View style={styles.actions}>
           <View style={styles.actionsItem}>
-            <AppText>-</AppText>
-            <AppText style={styles.text}>{quantity}</AppText>
-            <AppText>+</AppText>
+            <Button onPress={() => reduceItemFromCart(cartItem)}>-</Button>
+            <View style={styles.center}>
+              <AppText style={styles.text}>{quantity}</AppText>
+            </View>
+            <Button onPress={() => addToCart(cartItem)}>+</Button>
           </View>
           <View style={styles.actionsItem}>
-            <AppText>Trash</AppText>
-            <AppText>Like</AppText>
+            <Button
+              style={styles.trash}
+              onPress={() => deleteItemFromCart(cartItem)}>
+              <Icon
+                name="trash-outline"
+                size={20}
+                color={GlobalStyles.colors.black}
+              />
+            </Button>
+            <View style={styles.center}>
+              <Icon name="heart" size={20} color={GlobalStyles.colors.black} />
+            </View>
           </View>
         </View>
       </View>
@@ -82,19 +102,30 @@ const styles = StyleSheet.create({
   },
   title: {
     textTransform: 'uppercase',
-    marginBottom: 2,
+    marginBottom: 4,
   },
   text: {
     color: GlobalStyles.colors.grey,
+    marginBottom: 2,
+  },
+  color: {
+    flexDirection: 'row',
   },
   actions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     marginTop: 'auto',
-    backgroundColor: 'olivedrab',
   },
   actionsItem: {
     flexDirection: 'row',
     gap: 8,
+  },
+  trash: {
+    paddingHorizontal: 8,
+  },
+  center: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

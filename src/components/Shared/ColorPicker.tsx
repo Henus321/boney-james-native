@@ -1,6 +1,7 @@
 import {ItemOptionsType} from '../../models';
 import {Pressable, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {GlobalStyles} from '../../constants/styles';
+import ColorItem from './ColorItem';
 
 type ColorPickerProps = {
   itemOptions: ItemOptionsType[];
@@ -21,16 +22,9 @@ const ColorPicker = ({
         <Pressable
           onPress={() => setCurrentColor(colorHex)}
           key={id}
-          style={[
-            styles.colorPickerItem,
-            {backgroundColor: colorHex},
-            currentColor === colorHex && {
-              borderColor: GlobalStyles.colors.border,
-              borderStyle: 'solid',
-              borderWidth: 5,
-            },
-          ]}
-        />
+          style={styles.colorPickerItem}>
+          <ColorItem color={colorHex} active={currentColor === colorHex} />
+        </Pressable>
       ))}
     </View>
   );
@@ -44,9 +38,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   colorPickerItem: {
-    height: 28,
-    width: 28,
     marginRight: 4,
-    borderRadius: 15,
   },
 });

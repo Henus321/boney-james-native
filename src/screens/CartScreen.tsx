@@ -1,15 +1,16 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {useContext} from 'react';
 import {CartContext} from '../context/cart';
+import {GlobalStyles} from '../constants/styles';
 
 import CartCard from '../components/Cart/CartCard';
-import {GlobalStyles} from '../constants/styles';
 
 function CartScreen() {
   const {cart} = useContext(CartContext);
 
   return (
-    <ScrollView>
+    <ScrollView
+      contentContainerStyle={{flexGrow: !!cart.length ? undefined : 1}}>
       <View style={styles.container}>
         {cart && !!cart.length ? (
           cart.map(cartItem => (
@@ -33,6 +34,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 5,
     gap: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   emptyCart: {
     flex: 1,

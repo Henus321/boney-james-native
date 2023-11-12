@@ -12,14 +12,16 @@ export type CartContextState = {
   cart: CartItemType[];
   setCart: React.Dispatch<React.SetStateAction<CartItemType[]>>;
   addToCart: (item: CartItemType) => void;
-  deleteFromCart: (item: CartItemType) => void;
+  deleteItemFromCart: (item: CartItemType) => void;
+  reduceItemFromCart: (item: CartItemType) => void;
 };
 
 export const CartContext = createContext<CartContextState>({
   cart: [],
   setCart: () => {},
   addToCart: () => {},
-  deleteFromCart: () => {},
+  deleteItemFromCart: () => {},
+  reduceItemFromCart: () => {},
 });
 
 export const CartProvider = ({children}: {children: React.ReactNode}) => {
@@ -38,13 +40,12 @@ export const CartProvider = ({children}: {children: React.ReactNode}) => {
 
     const repeatItem = cart.find(item => item.id === newCartItemId);
     if (!!repeatItem) {
-      updateCartItem({...repeatItem, quantity: repeatItem.quantity + 1})
+      const updatedItem = {...repeatItem, quantity: repeatItem.quantity + 1};
+      updateCartItem(updatedItem)
         .then(() =>
           setCart(prev => [
             ...prev.map(item =>
-              item.id === repeatItem.id
-                ? {...repeatItem, quantity: repeatItem.quantity + 1}
-                : item,
+              item.id === repeatItem.id ? updatedItem : item,
             ),
           ]),
         )
@@ -60,7 +61,7 @@ export const CartProvider = ({children}: {children: React.ReactNode}) => {
     }
   };
 
-  const deleteFromCart = (cartItem: CartItemType) => {
+  const deleteItemFromCart = (cartItem: CartItemType) => {
     if (!cartItem.id) {
       console.log('Error! Cant find coat id');
       return;
@@ -72,11 +73,37 @@ export const CartProvider = ({children}: {children: React.ReactNode}) => {
       .catch(() => console.log('Cant delete cart item!'));
   };
 
+  const reduceItemFromCart = (cartItem: CartItemType) => {
+    if (!cartItem.id) {
+      console.log('Error! Cant find coat id');
+      return;
+    }
+
+    const isLast = cartItem.quantity < 2;
+    if (isLast) {
+      deleteCartItem(cartItem)
+        .then(() =>
+          setCart(prev => [...prev.filter(item => item.id !== cartItem.id)]),
+        )
+        .catch(() => console.log('Cant delete cart item!'));
+    } else {
+      const updatedItem = {...cartItem, quantity: cartItem.quantity - 1};
+      updateCartItem(updatedItem)
+        .then(() =>
+          setCart(prev => [
+            ...prev.map(item => (item.id === cartItem.id ? updatedItem : item)),
+          ]),
+        )
+        .catch(() => console.log('Cant update cart!'));
+    }
+  };
+
   const value = {
     cart,
     setCart,
     addToCart,
-    deleteFromCart,
+    deleteItemFromCart,
+    reduceItemFromCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
